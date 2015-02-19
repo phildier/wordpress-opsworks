@@ -1,8 +1,6 @@
-#
-# Cookbook Name:: wordpress-opsworks
-# Recipe:: default
-#
-# Copyright 2015, YOUR_COMPANY_NAME
-#
-# All rights reserved - Do Not Redistribute
-#
+
+# user-uploaded content
+directory node[:wordpress_opsworks][:content_dir] do
+	user "www-data"
+	group "www-data"
+end
