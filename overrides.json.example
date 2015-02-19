@@ -1,0 +1,7 @@
+{
+	"deploy":{
+		"wordpress-virtual":{
+			"shared":"/home/phil/projects/wordpress-opsworks"
+		}
+	}
+}
