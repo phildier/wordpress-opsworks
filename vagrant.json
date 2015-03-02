@@ -5,6 +5,14 @@
   "default_attributes": {
   },
   "override_attributes": {
+	  "wordpress_opsworks":{
+		  "vhosts":{
+			  "one":{
+			  },
+			  "two":{
+			  }
+		  }
+	  }
   },
   "chef_type": "role",
   "run_list": [
