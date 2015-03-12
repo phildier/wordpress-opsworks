@@ -1,4 +1,6 @@
 package "apache2"
+package "php5"
+package "php5-mysql"
 
 link "/etc/apache2/sites-enabled/000-default" do
 	action :delete
@@ -8,6 +10,3 @@ end
 service "apache2" do
 	action [:start,:enable]
 end
-
-package "php5"
-package "php5-mysql"
