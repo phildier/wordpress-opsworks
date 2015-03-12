@@ -32,6 +32,17 @@ action :create do
 				})
 	end
 
+	db_name = "wp_#{name}"
+
+	template "#{docroot}/wp-config.php" do
+		source "wp-config.php.erb"
+		variables ({
+				:name => db_name
+				})
+	end
+
+	# TODO: templatize unique salts config
+
 end
 
 action :delete do
