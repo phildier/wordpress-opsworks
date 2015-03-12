@@ -8,3 +8,6 @@ end
 service "apache2" do
 	action [:start,:enable]
 end
+
+package "php5"
+package "php5-mysql"
