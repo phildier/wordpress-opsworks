@@ -16,7 +16,9 @@
   },
   "chef_type": "role",
   "run_list": [
+	"apt",
 	"wordpress-opsworks",
+	"wordpress-opsworks::vagrant",
 	"wordpress-opsworks::setup_wordpress",
 	"wordpress-opsworks::setup_vhosts"
   ],
