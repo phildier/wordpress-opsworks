@@ -5,7 +5,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.box = "ubuntu1204-opsworks"
 	config.vm.box_url = "http://raven-opensource.s3.amazonaws.com/ubuntu1204-opsworks.box"
 	config.vm.network :private_network, ip: "10.49.0.10"
-	config.vm.network :forwarded_port, guest: 8000, host: 8080
+	config.vm.network :forwarded_port, guest: 80, host: 8080
 
 	overrides = JSON.parse(IO.read(File.dirname(__FILE__)+"/overrides.json"))
 
