@@ -1,8 +1,10 @@
 use_inline_resources
 
 action :create do
-	docroot = new_resource.name
+	name = new_resource.name
+	docroot = new_resource.docroot
 	source = new_resource.source
+	aliases = new_resource.aliases
 
 	directory docroot
 
@@ -16,11 +18,18 @@ action :create do
 	end
 
 	node[:wordpress_opsworks][:links].each do |from_shared,to_vhost|
-
-
 		link "#{docroot}/#{to_vhost}" do 
 			to "#{node[:wordpress_opsworks][:app_dir]}/#{from_shared}"
 		end
+	end
+
+	template "/etc/apache2/sites-enabled/#{name}.conf" do
+		source "wordpress-vhost.conf.erb"
+		variables ({
+				:name => name,
+				:aliases => aliases,
+				:docroot => docroot
+				})
 	end
 
 end
