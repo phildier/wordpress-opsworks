@@ -1,0 +1,11 @@
+<?php
+// site-specific config
+require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-config.php');
+
+// global config
+$table_prefix  = 'wp_';
+define('WP_DEBUG', false);
+if ( !defined('ABSPATH') ) {
+	define('ABSPATH', dirname(__FILE__) . '/');
+}
+require_once(ABSPATH . 'wp-settings.php');

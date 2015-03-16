@@ -8,19 +8,16 @@ action :create do
 
 	directory docroot
 
-	dirs = Set.new
-	node[:wordpress_opsworks][:links].each do |from_shared,to_vhost|
-		dirs << s = ::File.dirname(to_vhost) unless s == "."
+	link "#{docroot}/wordpress" do
+		to "#{node[:wordpress_opsworks][:app_dir]}"
 	end
 
-	dirs.each do |subdir|
-		directory "#{docroot}/#{subdir}"
-	end
-
-	node[:wordpress_opsworks][:links].each do |from_shared,to_vhost|
-		link "#{docroot}/#{to_vhost}" do 
-			to "#{node[:wordpress_opsworks][:app_dir]}/#{from_shared}"
-		end
+	file "#{docroot}/index.php" do
+		content <<-EOH
+<?php
+define('WP_USE_THEMES', true);
+require( dirname( __FILE__ ) . '/wordpress/wp-blog-header.php' );
+		EOH
 	end
 
 	template "/etc/apache2/sites-enabled/#{name}.conf" do
@@ -33,15 +30,42 @@ action :create do
 	end
 
 	db_name = "wp_#{name}"
+	content_dir = "#{node[:wordpress_opsworks][:content_dir]}/#{name}"
+	content_url = "//#{name}/wp-content"
 
 	template "#{docroot}/wp-config.php" do
-		source "wp-config.php.erb"
+		source "wp-site-config.php.erb"
 		variables ({
-				:name => db_name
+				:db_name => db_name,
+				:content_dir => content_dir,
+				:content_url => content_url
 				})
 	end
 
 	# TODO: templatize unique salts config
+
+	# on vagrant, write an opsworks config
+	if ::File.exists?("/vagrant") then
+		file "#{docroot}/opsworks.php" do
+			content <<-EOH
+<?php
+class OpsWorksDb {
+	public $username = "root";
+	public $password = "";
+	public $host = "127.0.0.1";
+	public $encoding = "utf8";
+}
+			EOH
+		end
+	end
+
+	file "#{docroot}/.htaccess" do
+		content <<-EOH
+Options -Indexes
+RewriteEngine on
+RewriteRule ^(/)?$ wordpress [L]
+		EOH
+	end
 
 end
 

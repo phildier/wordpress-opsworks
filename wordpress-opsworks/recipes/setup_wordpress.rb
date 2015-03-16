@@ -13,3 +13,8 @@ bash "untar-wordpress-app" do
 	tar xf #{wp_dist_file} --strip=1
 	EOH
 end
+
+root_wp_config = "#{node[:wordpress_opsworks][:app_dir]}/wp-config.php"
+template root_wp_config do
+	source "wp-global-config.php.erb"
+end

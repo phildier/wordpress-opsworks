@@ -7,9 +7,9 @@
   "override_attributes": {
 	  "wordpress_opsworks":{
 		  "vhosts":{
-			  "one":{
+			  "one.wp.site":{
 			  },
-			  "two":{
+			  "two.wp.site":{
 			  }
 		  }
 	  }

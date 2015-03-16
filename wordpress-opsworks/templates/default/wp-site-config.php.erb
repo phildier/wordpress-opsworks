@@ -1,0 +1,11 @@
+<?php
+require_once(__DIR__."/opsworks.php");
+$opsworks_db = new OpsWorksDb();
+define('DB_NAME', "<%=@db_name%>");
+define('DB_USER', $opsworks_db->username);
+define('DB_PASSWORD', $opsworks_db->password);
+define('DB_HOST', $opsworks_db->host);
+define('DB_CHARSET', $opsworks_db->encoding);
+define('DB_COLLATE', '');
+define("CONTENT_DIR","<%=@content_dir%>");
+define("CONTENT_URL","<%=@content_url%>");
