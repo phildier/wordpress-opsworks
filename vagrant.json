@@ -6,7 +6,16 @@
   },
   "override_attributes": {
 	  "wordpress_opsworks":{
+		  "mysql":{
+			  "host":"127.0.0.1",
+			  "username":"root",
+			  "password":""
+		  },
 		  "vhosts":{
+			  "wpagency.galaxydigital.com":{
+			  },
+			  "www.volunteerlubbock.org":{
+			  },
 			  "one.wp.site":{
 			  },
 			  "two.wp.site":{
