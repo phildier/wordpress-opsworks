@@ -6,10 +6,18 @@ action :create do
 	source = new_resource.source
 	aliases = new_resource.aliases
 
+	db_name = "wp_#{name}"
+	content_dir = "#{node[:wordpress_opsworks][:content_dir]}/#{name}"
+	content_url = "//#{name}/wp-content"
+
 	directory docroot
 
 	link "#{docroot}/wordpress" do
 		to "#{node[:wordpress_opsworks][:app_dir]}"
+	end
+
+	link content_dir do
+		to "#{node[:wordpress_opsworks][:app_dir]}/wp-content"
 	end
 
 	file "#{docroot}/index.php" do
@@ -25,13 +33,10 @@ require( dirname( __FILE__ ) . '/wordpress/wp-blog-header.php' );
 		variables ({
 				:name => name,
 				:aliases => aliases,
-				:docroot => docroot
+				:docroot => docroot,
+				:content_dir => content_dir
 				})
 	end
-
-	db_name = "wp_#{name}"
-	content_dir = "#{node[:wordpress_opsworks][:content_dir]}/#{name}"
-	content_url = "//#{name}/wp-content"
 
 	template "#{docroot}/wp-config.php" do
 		source "wp-site-config.php.erb"
@@ -63,8 +68,27 @@ class OpsWorksDb {
 		content <<-EOH
 Options -Indexes
 RewriteEngine on
-RewriteRule ^(/)?$ wordpress [L]
+
+RewriteBase /wordpress/
+
+RewriteCond %{REQUEST_FILENAME} !^wordpress
+RewriteCond %{REQUEST_FILENAME} wp-(.*)$
+RewriteRule .* /wordpress/wp-%1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [L]
 		EOH
+	end
+
+	siteurl = "http://#{name}:8080"
+	home = "http://#{name}:8080"
+	wordpress_opsworks_db db_name do
+		siteurl siteurl
+		home home
+		admin_username "wpadmin"
+		admin_password "wpadmin"
+		database_file "/vagrant/cache/wpagency.sql.bz2"
 	end
 
 end
