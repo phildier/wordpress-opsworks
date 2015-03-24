@@ -1,5 +1,7 @@
 use_inline_resources
 
+include WordpressOpsworks
+
 action :create do
     db_name = new_resource.name
     siteurl = new_resource.siteurl
@@ -37,12 +39,4 @@ def import_db(db_name,database_file)
 	execute "bunzip2 -c #{database_file} | mysql #{auth_str} #{db_name}" do
 		not_if { system("mysql #{auth_str} -e 'SHOW TABLES' | egrep -e 'options'") }
 	end
-end
-
-# cli auth parameters
-def mysql_auth
-	if ! node[:wordpress_opsworks][:mysql][:password].empty?
-		pw = "-p'#{node[:wordpress_opsworks][:mysql][:password] }'"
-	end
-	"-h #{node[:wordpress_opsworks][:mysql][:host]} -u #{node[:wordpress_opsworks][:mysql][:username]} #{pw}"
 end
