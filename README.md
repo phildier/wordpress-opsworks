@@ -12,6 +12,6 @@ codebase.
 - create database on provision :shipit:
  - import skeleton schema / data :shipit:
  - modify siteurl & home settings :shipit:
- - set default admin user / pass :shipit:
+ - set default admin user / pass
 - set up plugins & themes
 - set up random encryption salts once

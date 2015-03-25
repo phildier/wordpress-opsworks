@@ -69,15 +69,10 @@ class OpsWorksDb {
 Options -Indexes
 RewriteEngine on
 
-RewriteBase /wordpress/
+# vhost-specific rewrite rules go here
 
-RewriteCond %{REQUEST_FILENAME} !^wordpress
-RewriteCond %{REQUEST_FILENAME} wp-(.*)$
-RewriteRule .* /wordpress/wp-%1 [L]
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . index.php [L]
+# end rewrite rules
 		EOH
 	end
 
@@ -86,9 +81,7 @@ RewriteRule . index.php [L]
 	wordpress_opsworks_db db_name do
 		siteurl siteurl
 		home home
-		admin_username "wpadmin"
-		admin_password "wpadmin"
-		database_file "/vagrant/cache/wpagency.sql.bz2"
+		database_file node[:wordpress_opsworks][:mysql][:schema_file]
 	end
 
 end

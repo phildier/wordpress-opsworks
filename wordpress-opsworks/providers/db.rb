@@ -6,13 +6,11 @@ action :create do
     db_name = new_resource.name
     siteurl = new_resource.siteurl
     home = new_resource.home
-    admin_username = new_resource.admin_username
-    admin_password = new_resource.admin_password
 	database_file = new_resource.database_file
 
 	if create_db(db_name)
 		if import_db(db_name,database_file)
-
+			true
 		else 
 			raise "couldn't import database #{db_name}"
 		end
@@ -25,18 +23,28 @@ end
 
 private
 
+def database_exists?(database)
+	system("mysql #{mysql_auth} -e 'SHOW DATABASES' | egrep -e '^#{database}$'")
+end
+
+def database_empty?(database)
+	system("mysql #{mysql_auth} #{database} -e 'SHOW TABLES' | egrep 'options'") ? false : true
+end
+
 # creates database if it doesn't exist
 def create_db(db_name)
-	auth_str = mysql_auth
-	execute "mysqladmin #{auth_str} create #{db_name}" do
-		not_if { system("mysql #{auth_str} -e 'SHOW DATABASES' | egrep -e '^#{db_name}$'") }
+	if ! database_exists?(db_name)
+		execute "mysqladmin #{mysql_auth} create #{db_name}"
+	else
+		true
 	end
 end
 
-# import database
+# import schema if db is empty
 def import_db(db_name,database_file)
-	auth_str = mysql_auth
-	execute "bunzip2 -c #{database_file} | mysql #{auth_str} #{db_name}" do
-		not_if { system("mysql #{auth_str} -e 'SHOW TABLES' | egrep -e 'options'") }
+	if database_empty?(db_name)
+		execute "bunzip2 -c #{database_file} | mysql #{mysql_auth} #{db_name}"
+	else
+		true
 	end
 end

@@ -2,6 +2,8 @@
 
 directory node[:wordpress_opsworks][:virtual_dir]
 
+service "apache2"
+
 # set up the symlinked vhosts
 node[:wordpress_opsworks][:vhosts].each do |name,vhost|
 	docroot = "#{node[:wordpress_opsworks][:virtual_dir]}/#{name}"
@@ -15,9 +17,19 @@ node[:wordpress_opsworks][:vhosts].each do |name,vhost|
 		notifies :reload, "service[apache2]", :delayed
 	end
 
-	wordpress_opsworks_user "admin" do
+	wordpress_opsworks_user "#{name}-admin" do
+		name vhost[:admin_username] || "admin"
 		database db_name
-		password "admin"
+		password vhost[:admin_password] || "admin"
+	end
+
+	wordpress_opsworks_options db_name do
+		siteurl vhost[:siteurl] || "http://#{name}/"
+		home vhost[:home] || "http://#{name}/"
+		blogname vhost[:blogname] || "Default Blog"
+		blogdescription vhost[:blogdescription] || "Default settings.  Try updating the vhost in your stack json"
+		users_can_register vhost[:users_can_register] || "1"
+		admin_email vhost[:admin_email] || "admin@#{name}"
 	end
 	
 end

@@ -10,14 +10,14 @@
 
 	Alias /wp-content <%=@content_dir%>
 
-	RewriteLogLevel 3
+	RewriteLogLevel 1 
 	RewriteLog /var/log/apache2/rewrite_log
 
 	<Directory <%=@docroot%>>
 		AllowOverride all
 		Order allow,deny
 		Allow from all
-		Options -Indexes
+		Options -Indexes FollowSymLinks
 	</Directory>
 </VirtualHost>
 

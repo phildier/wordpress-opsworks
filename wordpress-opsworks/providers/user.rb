@@ -12,8 +12,11 @@ action :create do
 	status = new_resource.status
 	display_name = new_resource.display_name
 
-	create_user(database,username,password,nicename,email,url,status,display_name)
-
+	user_id = create_user(database,username,password,nicename,email,url,status,display_name)
+	set_user_meta(database,user_id,'wp_capabilities','a:1:{s:13:"administrator";b:1;}')
+	set_user_meta(database,user_id,'wp_user_level','10')
+	set_user_meta(database,user_id,'show_admin_bar_front','true')
+	set_user_meta(database,user_id,'show_welcome_panel','1')
 end
 
 
@@ -24,13 +27,20 @@ def user_exists?(database,username)
 end
 
 def create_user(database,username,password,nicename,email,url,status,display_name)
-	auth_str = mysql_auth
 	insert_statement = sprintf(
 			"insert into wp_users (user_login,user_pass,user_nicename,user_email,user_url,user_status,display_name) values ('%s',MD5('%s'),'%s','%s','%s','%s','%s')",
 			username,password,nicename,email,url,status,display_name
 			)
-	puts insert_statement
-	if !user_exists?(database,username) then
-		system "mysql #{auth_str} #{database} -e \"#{insert_statement}\""
+	if ! user_exists?(database,username)
+		system "mysql #{mysql_auth} #{database} -e \"#{insert_statement}\""
 	end
+
+	# return user id
+	`mysql #{mysql_auth} #{database} -e "select ID from wp_users where user_login='#{username}'" | tail -n1`.strip
+end
+
+def set_user_meta(database,user_id,meta_key,meta_value)
+	insert_statement = "INSERT IGNORE INTO wp_usermeta (user_id,meta_key,meta_value) VALUES ('%s','%s','%s')" % [user_id,meta_key,meta_value]
+	puts insert_statement
+	system "mysql #{mysql_auth} #{database} -e \"#{insert_statement}\""
 end

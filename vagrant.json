@@ -9,10 +9,13 @@
 		  "mysql":{
 			  "host":"127.0.0.1",
 			  "username":"root",
-			  "password":""
+			  "password":"",
+			  "schema_file":"/vagrant/cache/wpagency.sql.bz2"
 		  },
 		  "vhosts":{
 			  "wpagency.galaxydigital.com":{
+				  "siteurl":"http://wpagency.galaxydigital.com/wordpress/",
+				  "home":"http://wpagency.galaxydigital.com/wordpress/"
 			  },
 			  "www.volunteerlubbock.org":{
 			  },
@@ -26,9 +29,6 @@
   "chef_type": "role",
   "run_list": [
 	"apt",
-	"wordpress-opsworks",
-	"wordpress-opsworks::vagrant",
-	"wordpress-opsworks::setup_wordpress",
 	"wordpress-opsworks::setup_vhosts"
   ],
   "env_run_lists": {
