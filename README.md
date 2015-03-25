@@ -9,9 +9,9 @@ codebase.
 - http://wordpress.stackexchange.com/questions/57109/how-to-share-wordpress-core-library
 
 ### TODO
-- create database on provision
- - import skeleton schema / data
- - modify siteurl & home settings
- - set default admin user / pass
+- create database on provision :check:
+ - import skeleton schema / data :check:
+ - modify siteurl & home settings :check:
+ - set default admin user / pass :check:
 - set up plugins & themes
 - set up random encryption salts once
