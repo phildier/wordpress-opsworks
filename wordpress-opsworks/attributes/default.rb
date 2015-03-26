@@ -7,6 +7,9 @@ default[:wordpress_opsworks][:app_dir] = "/opt/wordpress"
 # user uploads and content
 default[:wordpress_opsworks][:content_dir] = "/opt/content"
 
+# global wordpress plugins
+default[:wordpress_opsworks][:plugin_dir] = "/opt/plugin"
+
 # wordpress virtual hosts
 default[:wordpress_opsworks][:virtual_dir] = "/opt/virtual"
 default[:wordpress_opsworks][:vhosts] = {}

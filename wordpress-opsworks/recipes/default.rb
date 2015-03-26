@@ -7,3 +7,9 @@ directory node[:wordpress_opsworks][:content_dir] do
 	user "www-data"
 	group "www-data"
 end
+
+# wordpress plugins
+directory node[:wordpress_opsworks][:plugin_dir] do
+	user "www-data"
+	group "www-data"
+end

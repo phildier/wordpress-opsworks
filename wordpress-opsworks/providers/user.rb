@@ -40,6 +40,5 @@ end
 
 def set_user_meta(database,user_id,meta_key,meta_value)
 	insert_statement = "INSERT IGNORE INTO wp_usermeta (user_id,meta_key,meta_value) VALUES ('%s','%s','%s')" % [user_id,meta_key,meta_value]
-	puts insert_statement
 	system "mysql #{mysql_auth} #{database} -e "+Shellwords.escape(insert_statement)
 end

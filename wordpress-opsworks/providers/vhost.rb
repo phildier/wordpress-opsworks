@@ -9,8 +9,11 @@ action :create do
 	db_name = "wp_#{name}"
 	content_dir = "#{node[:wordpress_opsworks][:content_dir]}/#{name}"
 	content_url = "//#{name}/wp-content"
+	plugin_dir = "#{node[:wordpress_opsworks][:plugin_dir]}/#{name}"
+	plugin_url = "//#{name}/wp-plugin"
 
 	directory docroot
+	directory plugin_dir
 
 	link "#{docroot}/wordpress" do
 		to "#{node[:wordpress_opsworks][:app_dir]}"
@@ -34,7 +37,8 @@ require( dirname( __FILE__ ) . '/wordpress/wp-blog-header.php' );
 				:name => name,
 				:aliases => aliases,
 				:docroot => docroot,
-				:content_dir => content_dir
+				:content_dir => content_dir,
+				:plugin_dir => plugin_dir
 				})
 	end
 
@@ -43,7 +47,9 @@ require( dirname( __FILE__ ) . '/wordpress/wp-blog-header.php' );
 		variables ({
 				:db_name => db_name,
 				:content_dir => content_dir,
-				:content_url => content_url
+				:content_url => content_url,
+				:plugin_dir => plugin_dir,
+				:plugin_url => plugin_url
 				})
 	end
 

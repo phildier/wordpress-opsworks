@@ -10,7 +10,8 @@
 			  "host":"127.0.0.1",
 			  "username":"root",
 			  "password":"",
-			  "schema_file":"/vagrant/cache/wpagency.sql.bz2"
+			  "schema_file":"/vagrant/cache/wpagency-20150325.sql.bz2",
+			  "schema_file2":"/vagrant/cache/wordpress_lubbock.sql.bz2"
 		  },
 		  "vhosts":{
 			  "wpagency.galaxydigital.com":{
@@ -29,6 +30,7 @@
   "chef_type": "role",
   "run_list": [
 	"apt",
+	"wordpress-opsworks",
 	"wordpress-opsworks::setup_vhosts"
   ],
   "env_run_lists": {
