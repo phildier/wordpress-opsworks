@@ -1,6 +1,7 @@
 use_inline_resources
 
 include WordpressOpsworks
+require 'shellwords'
 
 action :create do
 	username = new_resource.name
@@ -15,8 +16,6 @@ action :create do
 	user_id = create_user(database,username,password,nicename,email,url,status,display_name)
 	set_user_meta(database,user_id,'wp_capabilities','a:1:{s:13:"administrator";b:1;}')
 	set_user_meta(database,user_id,'wp_user_level','10')
-	set_user_meta(database,user_id,'show_admin_bar_front','true')
-	set_user_meta(database,user_id,'show_welcome_panel','1')
 end
 
 
@@ -42,5 +41,5 @@ end
 def set_user_meta(database,user_id,meta_key,meta_value)
 	insert_statement = "INSERT IGNORE INTO wp_usermeta (user_id,meta_key,meta_value) VALUES ('%s','%s','%s')" % [user_id,meta_key,meta_value]
 	puts insert_statement
-	system "mysql #{mysql_auth} #{database} -e \"#{insert_statement}\""
+	system "mysql #{mysql_auth} #{database} -e "+Shellwords.escape(insert_statement)
 end
