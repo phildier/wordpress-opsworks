@@ -15,10 +15,13 @@
 		  },
 		  "vhosts":{
 			  "wpagency.galaxydigital.com":{
-				  "siteurl":"http://wpagency.galaxydigital.com/wordpress/",
-				  "home":"http://wpagency.galaxydigital.com/wordpress/"
+				  "siteurl":"http://wpagency.galaxydigital.com/",
+				  "home":"http://wpagency.galaxydigital.com/",
+				  "plugins":["akismet"]
 			  },
 			  "www.volunteerlubbock.org":{
+				  "themes":["vcl"],
+				  "plugins":["akismet"]
 			  },
 			  "one.wp.site":{
 			  },

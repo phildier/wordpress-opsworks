@@ -5,22 +5,39 @@ action :create do
 	docroot = new_resource.docroot
 	source = new_resource.source
 	aliases = new_resource.aliases
+	themes = new_resource.themes
+	plugins = new_resource.plugins
 
 	db_name = "wp_#{name}"
-	content_dir = "#{node[:wordpress_opsworks][:content_dir]}/#{name}"
+	content_dir = "#{node[:wordpress_opsworks][:user_dir]}/#{name}"
 	content_url = "//#{name}/wp-content"
-	plugin_dir = "#{node[:wordpress_opsworks][:plugin_dir]}/#{name}"
+	plugin_dir = "#{content_dir}/plugins"
 	plugin_url = "//#{name}/wp-plugin"
 
 	directory docroot
-	directory plugin_dir
 
 	link "#{docroot}/wordpress" do
 		to "#{node[:wordpress_opsworks][:app_dir]}"
 	end
 
-	link content_dir do
-		to "#{node[:wordpress_opsworks][:app_dir]}/wp-content"
+	# vhost user content directory
+	directory content_dir
+	directory "#{content_dir}/uploads"
+
+	# symlink selected themes to vhost
+	directory "#{content_dir}/themes"
+	themes.each do |t|
+		link "#{content_dir}/themes/#{t}" do
+			to "#{node[:wordpress_opsworks][:content_dir]}/themes/#{t}"
+		end
+	end
+
+	# symlink selected plugins to vhost
+	directory "#{content_dir}/plugins"
+	plugins.each do |p|
+		link "#{content_dir}/plugins/#{p}" do
+			to "#{node[:wordpress_opsworks][:content_dir]}/plugins/#{p}"
+		end
 	end
 
 	file "#{docroot}/index.php" do
@@ -77,6 +94,11 @@ RewriteEngine on
 
 # vhost-specific rewrite rules go here
 
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
 
 # end rewrite rules
 		EOH

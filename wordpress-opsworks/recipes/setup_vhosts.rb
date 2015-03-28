@@ -15,6 +15,8 @@ node[:wordpress_opsworks][:vhosts].each do |name,vhost|
 		docroot docroot
 		source node[:wordpress_opsworks][:app_dir]
 		notifies :reload, "service[apache2]", :delayed
+		themes vhost[:themes] || node[:wordpress_opsworks][:default_themes]
+		plugins vhost[:plugins] || node[:wordpress_opsworks][:default_plugins]
 	end
 
 	wordpress_opsworks_user "#{name}-admin" do
