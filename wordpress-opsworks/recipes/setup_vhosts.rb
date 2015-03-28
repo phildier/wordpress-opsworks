@@ -23,6 +23,14 @@ node[:wordpress_opsworks][:vhosts].each do |name,vhost|
 		name vhost[:admin_username] || "admin"
 		database db_name
 		password vhost[:admin_password] || "admin"
+		role "admin"
+	end
+
+	wordpress_opsworks_user "#{name}-editor" do
+		name vhost[:editor_username] || "editor"
+		database db_name
+		password vhost[:editor_password] || "editor"
+		role "editor"
 	end
 
 	wordpress_opsworks_options db_name do

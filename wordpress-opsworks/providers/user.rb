@@ -12,10 +12,12 @@ action :create do
 	url = new_resource.url
 	status = new_resource.status
 	display_name = new_resource.display_name
+	role = new_resource.role
+	level = new_resource.level
 
 	user_id = create_user(database,username,password,nicename,email,url,status,display_name)
-	set_user_meta(database,user_id,'wp_capabilities','a:1:{s:13:"administrator";b:1;}')
-	set_user_meta(database,user_id,'wp_user_level','10')
+	set_user_meta(database,user_id,'wp_capabilities','a:1:{s:13:"%s";b:1;}' % [role])
+	set_user_meta(database,user_id,'wp_user_level',level)
 end
 
 
