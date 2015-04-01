@@ -6,13 +6,14 @@
 	DocumentRoot <%=@docroot%>
 
 	LogFormat "%{Host}i %{X-Forwarded-For}i %P %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" vhost_combined
-	CustomLog /var/log/apache2/other_vhosts_access.log vhost_combined
+	CustomLog /var/log/apache2/wordpress_access.log vhost_combined
+	ErrorLog /var/log/apache2/wordpress_error.log
 
 	Alias /wp-content <%=@content_dir%>
 	Alias /wp-plugin <%=@plugin_dir%>
 
 	RewriteLogLevel 1 
-	RewriteLog /var/log/apache2/rewrite_log
+	RewriteLog /var/log/apache2/wordpress_rewrite.log
 
 	<Directory <%=@docroot%>>
 		AllowOverride all
