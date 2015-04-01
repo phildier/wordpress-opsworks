@@ -21,3 +21,8 @@ default[:wordpress_opsworks][:mysql][:password] = ""
 
 default[:wordpress_opsworks][:default_themes] = ["twentyfifteen"]
 default[:wordpress_opsworks][:default_plugins] = []
+
+# s3 stuff
+default[:wordpress_opsworks][:s3][:bucket] = nil
+default[:wordpress_opsworks][:s3][:id] = nil
+default[:wordpress_opsworks][:s3][:key] = nil

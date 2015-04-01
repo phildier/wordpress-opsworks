@@ -11,7 +11,7 @@
 			  "host":"127.0.0.1",
 			  "username":"root",
 			  "password":"",
-			  "schema_file":"/vagrant/cache/wpagency-20150325.sql.bz2",
+			  "schema_file":"wpagency-20150325.sql.bz2",
 			  "schema_file2":"/vagrant/cache/wordpress_lubbock.sql.bz2"
 		  },
 		  "vhosts":{

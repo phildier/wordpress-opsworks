@@ -110,7 +110,7 @@ RewriteRule . /index.php [L]
 	wordpress_opsworks_db db_name do
 		siteurl siteurl
 		home home
-		database_file node[:wordpress_opsworks][:mysql][:schema_file]
+		database_file "#{node[:wordpress_opsworks][:cache_dir]}/#{node[:wordpress_opsworks][:mysql][:schema_file]}"
 	end
 
 end
