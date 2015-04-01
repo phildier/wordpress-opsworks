@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__."/opsworks.php");
+require_once("<%=@wpcontent_dir%>/opsworks.php");
 $opsworks_db = new OpsWorksDb();
 define('DB_NAME', "<%=@db_name%>");
 define('DB_USER', $opsworks_db->username);
