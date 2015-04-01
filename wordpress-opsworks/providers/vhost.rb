@@ -75,7 +75,7 @@ require( dirname( __FILE__ ) . '/wordpress/wp-blog-header.php' );
 
 	# on vagrant, write an opsworks config
 	if ::File.exists?("/vagrant") then
-		file "#{docroot}/opsworks.php" do
+		file "#{node[:wordpress_opsworks][:content_dir]}/opsworks.php" do
 			content <<-EOH
 <?php
 class OpsWorksDb {
