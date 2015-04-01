@@ -5,7 +5,7 @@
 	<% end %>
 	DocumentRoot <%=@docroot%>
 
-	LogFormat "%{Host}i %{X-Forwarded-For}i %P %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined
+	LogFormat "%{Host}i %{X-Forwarded-For}i %P %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" vhost_combined
 	CustomLog /var/log/apache2/other_vhosts_access.log vhost_combined
 
 	Alias /wp-content <%=@content_dir%>

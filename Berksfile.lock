@@ -1,11 +1,11 @@
 DEPENDENCIES
   apache2
+    git: https://github.com/aws/opsworks-cookbooks.git
+    revision: 4590788ba0179cc2befa73d833ccae7bffe6e187
+    branch: release-chef-11.10
+    rel: apache2
   apt
 
 GRAPH
-  apache2 (3.0.1)
-    iptables (>= 0.0.0)
-    logrotate (>= 0.0.0)
-  apt (2.6.1)
-  iptables (0.14.1)
-  logrotate (1.9.0)
+  apache2 (1.0.0)
+  apt (2.7.0)

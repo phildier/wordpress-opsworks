@@ -5,10 +5,10 @@ default[:wordpress_opsworks][:cache_dir] = "/vagrant/cache"
 default[:wordpress_opsworks][:app_dir] = "/opt/wordpress"
 
 # global themes and plugins
-default[:wordpress_opsworks][:content_dir] = "/opt/wp-content"
+default[:wordpress_opsworks][:content_dir] = "/opt/content"
 
 # user uploads and content
-default[:wordpress_opsworks][:user_dir] = "/opt/content"
+default[:wordpress_opsworks][:user_dir] = "/opt/user"
 
 # wordpress virtual hosts
 default[:wordpress_opsworks][:virtual_dir] = "/opt/virtual"

@@ -6,6 +6,7 @@
   },
   "override_attributes": {
 	  "wordpress_opsworks":{
+		  "content_dir":"/srv/www/wp-content/current",
 		  "mysql":{
 			  "host":"127.0.0.1",
 			  "username":"root",
@@ -34,6 +35,8 @@
   "run_list": [
 	"apt",
 	"wordpress-opsworks",
+	"wordpress-opsworks::vagrant",
+	"wordpress-opsworks::setup_wordpress",
 	"wordpress-opsworks::setup_vhosts"
   ],
   "env_run_lists": {
