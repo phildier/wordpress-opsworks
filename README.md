@@ -70,7 +70,7 @@ Add these recipes to your layer's custom lifecycle events:
 | `vhost[:home]` | Home url of blog, (default: http://domainname.com/) | optional |
 | `vhost[:blogname]` | Initial blog name | optional |
 | `vhost[:blogdescription]` | Initial description | optional |
-| `vhost[:users_can_register]` | Allow user registration (0|1) | optional |
+| `vhost[:users_can_register]` | Allow user registration (0&#124;1) | optional |
 | `vhost[:admin_email]` | Administrator contact email | optional |
 | `vhost[:aliases]` | array of alias domains | optional |
 | `vhost[:debug]` | Enable wordpress debug mode | optional |
