@@ -58,22 +58,22 @@ Add these recipes to your layer's custom lifecycle events:
 
 `node[:wordpress_opsworks][:vhosts]`
 
-| Key | Description 
-+------+------+-----
-| `vhost[:admin_username]` | Administrator username used for initial setup (default: admin) | *recommended*
-| `vhost[:admin_password]` | Administrator password used for initial setup (default: admin) | *recommended*
-| `vhost[:editor_username]` | Editor username used for initial setup (default: editor) | *recommended*
-| `vhost[:editor_password]` | Editor password used for initial setup (default: editor) | *recommended*
-| `vhost[:themes]` | array of themes to link to the vhost
-| `vhost[:plugins]` | array of plugins to link to the vhost
-| `vhost[:siteurl]` | Site url of blog, used for internal links (default: http://domainname.com/wordpress/)
-| `vhost[:home]` | Home url of blog, (default: http://domainname.com/)
-| `vhost[:blogname]` | Initial blog name
-| `vhost[:blogdescription]` | Initial description
-| `vhost[:users_can_register]` | Allow user registration (0|1)
-| `vhost[:admin_email]` | Administrator contact email
-| `vhost[:aliases]` | array of alias domains
-| `vhost[:debug]` | Enable wordpress debug mode
+| Key | Description | Required |
+| --- | --- | --- |
+| `vhost[:admin_username]` | Administrator username used for initial setup (default: admin) | recommended |
+| `vhost[:admin_password]` | Administrator password used for initial setup (default: admin) | recommended |
+| `vhost[:editor_username]` | Editor username used for initial setup (default: editor) | recommended |
+| `vhost[:editor_password]` | Editor password used for initial setup (default: editor) | recommended |
+| `vhost[:themes]` | array of themes to link to the vhost | optional |
+| `vhost[:plugins]` | array of plugins to link to the vhost | optional |
+| `vhost[:siteurl]` | Site url of blog, used for internal links (default: http://domainname.com/wordpress/) | optional |
+| `vhost[:home]` | Home url of blog, (default: http://domainname.com/) | optional |
+| `vhost[:blogname]` | Initial blog name | optional |
+| `vhost[:blogdescription]` | Initial description | optional |
+| `vhost[:users_can_register]` | Allow user registration (0|1) | optional |
+| `vhost[:admin_email]` | Administrator contact email | optional |
+| `vhost[:aliases]` | array of alias domains | optional |
+| `vhost[:debug]` | Enable wordpress debug mode | optional |
 
 ### TODO
 
