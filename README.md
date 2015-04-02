@@ -47,12 +47,31 @@ codebase, with options for individually configured plugins and themes.
 }
 ```
 
-### Custom lifecycle events:
+### Custom lifecycle events
 
 Add these recipes to your layer's custom lifecycle events:
 
 - Setup: `wordpress-opsworks` `wordpress-opsworks::setup_wordpress`
 - Deploy: `wordpress-opsworks::setup_vhosts`
+
+### Virtual host configuration
+
+`node[:wordpress_opsworks][:vhosts]`
+
+`vhost[:admin_username]` *recommended* Administrator username used for initial setup (default: admin)
+`vhost[:admin_password]` *recommended* Administrator password used for initial setup (default: admin)
+`vhost[:editor_username]` *recommended* Editor username used for initial setup (default: editor)
+`vhost[:editor_password]` *recommended* Editor password used for initial setup (default: editor)
+`vhost[:themes]` array of themes to link to the vhost
+`vhost[:plugins]` array of plugins to link to the vhost
+`vhost[:siteurl]` Site url of blog, used for internal links (default: http://domainname.com/wordpress/)
+`vhost[:home]` Home url of blog, (default: http://domainname.com/)
+`vhost[:blogname]` Initial blog name
+`vhost[:blogdescription]` Initial description
+`vhost[:users_can_register]` Allow user registration (0|1)
+`vhost[:admin_email]` Administrator contact email
+`vhost[:aliases]` array of alias domains
+`vhost[:debug]` Enable wordpress debug mode
 
 ### TODO
 
