@@ -17,6 +17,7 @@ node[:wordpress_opsworks][:vhosts].each do |name,vhost|
 		notifies :reload, "service[apache2]", :delayed
 		themes vhost[:themes] || node[:wordpress_opsworks][:default_themes]
 		plugins vhost[:plugins] || node[:wordpress_opsworks][:default_plugins]
+		aliases vhost[:aliases] || node[:wordpress_opsworks][:default_aliases]
 		debug vhost[:debug] || "false"
 	end
 

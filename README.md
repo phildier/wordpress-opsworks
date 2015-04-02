@@ -32,8 +32,8 @@ codebase, with options for individually configured plugins and themes.
 				"blogname":"Name of the Blog",
 				"blogdescription":"Description of the Blog",
 				"users_can_register":"1",
-				"admin_email":"admin@domainone.com"
-				
+				"admin_email":"admin@domainone.com",
+				"aliases":["sub1.domainone.com","sub2.domainone.com"]
 			},
 			"domaintwo.com":{ ... },
 			"domainthree.com":{ ... }
