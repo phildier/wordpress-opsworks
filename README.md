@@ -58,6 +58,8 @@ Add these recipes to your layer's custom lifecycle events:
 
 `node[:wordpress_opsworks][:vhosts]`
 
+| Key | Description 
++------+------+-----
 | `vhost[:admin_username]` | Administrator username used for initial setup (default: admin) | *recommended*
 | `vhost[:admin_password]` | Administrator password used for initial setup (default: admin) | *recommended*
 | `vhost[:editor_username]` | Editor username used for initial setup (default: editor) | *recommended*
