@@ -24,7 +24,7 @@ node[:wordpress_opsworks][:vhosts].each do |name,vhost|
 		name vhost[:admin_username] || "admin"
 		database db_name
 		password vhost[:admin_password] || "admin"
-		role "admin"
+		role "administrator"
 	end
 
 	wordpress_opsworks_user "#{name}-editor" do
@@ -35,7 +35,7 @@ node[:wordpress_opsworks][:vhosts].each do |name,vhost|
 	end
 
 	wordpress_opsworks_options db_name do
-		siteurl vhost[:siteurl] || "http://#{name}/"
+		siteurl vhost[:siteurl] || "http://#{name}/wordpress/"
 		home vhost[:home] || "http://#{name}/"
 		blogname vhost[:blogname] || "Default Blog"
 		blogdescription vhost[:blogdescription] || "Default settings.  Try updating the vhost in your stack json"
