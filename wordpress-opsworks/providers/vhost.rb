@@ -67,7 +67,8 @@ require( dirname( __FILE__ ) . '/wordpress/wp-blog-header.php' );
 				:content_url => content_url,
 				:plugin_dir => plugin_dir,
 				:plugin_url => plugin_url,
-				:wpcontent_dir => node[:wordpress_opsworks][:content_dir]
+				:wpcontent_dir => node[:wordpress_opsworks][:content_dir],
+				:debug => new_resource.debug
 				})
 	end
 

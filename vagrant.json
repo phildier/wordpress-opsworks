@@ -18,7 +18,8 @@
 			  "wpagency.galaxydigital.com":{
 				  "siteurl":"http://wpagency.galaxydigital.com/",
 				  "home":"http://wpagency.galaxydigital.com/",
-				  "plugins":["akismet"]
+				  "plugins":["akismet"],
+				  "debug":"true"
 			  },
 			  "www.volunteerlubbock.org":{
 				  "themes":["vcl"],
