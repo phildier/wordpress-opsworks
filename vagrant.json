@@ -19,7 +19,8 @@
 				  "siteurl":"http://wpagency.galaxydigital.com/",
 				  "home":"http://wpagency.galaxydigital.com/",
 				  "plugins":["akismet"],
-				  "debug":"true"
+				  "debug":true,
+				  "copy_themes":true
 			  },
 			  "www.volunteerlubbock.org":{
 				  "themes":["vcl"],

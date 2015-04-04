@@ -7,6 +7,7 @@ action :create do
 	aliases = new_resource.aliases
 	themes = new_resource.themes
 	plugins = new_resource.plugins
+	copy_themes = new_resource.copy_themes
 
 	db_name = "wp_#{name}"
 	content_dir = "#{node[:wordpress_opsworks][:user_dir]}/#{name}"
@@ -24,11 +25,23 @@ action :create do
 	directory content_dir
 	directory "#{content_dir}/uploads"
 
-	# symlink selected themes to vhost
+	# selected vhost themes
 	directory "#{content_dir}/themes"
 	themes.each do |t|
-		link "#{content_dir}/themes/#{t}" do
-			to "#{node[:wordpress_opsworks][:content_dir]}/themes/#{t}"
+		if copy_themes then
+			# copy the theme to the user directory and update ownership
+			bash "copy theme #{t} to #{name}" do
+				code <<-EOH
+					cp -a "#{node[:wordpress_opsworks][:content_dir]}/themes/#{t}" "#{content_dir}/themes/#{t}"
+					chown -R www-data: "#{content_dir}/themes/#{t}"
+				EOH
+				not_if { ::File.exists?("#{content_dir}/themes/#{t}") }
+			end
+		else
+			# symlink theme
+			link "#{content_dir}/themes/#{t}" do
+				to "#{node[:wordpress_opsworks][:content_dir]}/themes/#{t}"
+			end
 		end
 	end
 
