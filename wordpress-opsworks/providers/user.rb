@@ -16,7 +16,7 @@ action :create do
 	level = new_resource.level
 
 	user_id = create_user(database,username,password,nicename,email,url,status,display_name)
-	set_user_meta(database,user_id,'wp_capabilities','a:1:{s:13:"%s";b:1;}' % [role])
+	set_user_meta(database,user_id,'wp_capabilities','a:1:{s:%s:"%s";b:1;}' % [role.length, role])
 	set_user_meta(database,user_id,'wp_user_level',level)
 end
 
@@ -24,7 +24,7 @@ end
 private
 
 def user_exists?(database,username)
-	system "mysql -u root #{database} -e 'select user_login from wp_users' | egrep '^#{username}$'"
+	system "mysql #{mysql_auth} #{database} -e 'select user_login from wp_users' | egrep '^#{username}$'"
 end
 
 def create_user(database,username,password,nicename,email,url,status,display_name)

@@ -27,6 +27,7 @@ node[:wordpress_opsworks][:vhosts].each do |name,vhost|
 		database db_name
 		password vhost[:admin_password] || "admin"
 		role "administrator"
+		level "10"
 	end
 
 	wordpress_opsworks_user "#{name}-editor" do
@@ -34,6 +35,7 @@ node[:wordpress_opsworks][:vhosts].each do |name,vhost|
 		database db_name
 		password vhost[:editor_password] || "editor"
 		role "editor"
+		level "7"
 	end
 
 	wordpress_opsworks_options db_name do
