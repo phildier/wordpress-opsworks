@@ -5,9 +5,21 @@ DEPENDENCIES
     branch: release-chef-11.10
     rel: apache2
   apt
+  openssh
   s3_file
+  sftp-chroot
+    git: https://github.com/phildier/sftp-chroot.git
+    revision: d1a16ac9038a7747e378675a248f339a285c0b3f
+    branch: master
 
 GRAPH
   apache2 (1.0.0)
   apt (2.7.0)
+  build-essential (2.2.2)
+  iptables (1.0.0)
+  openssh (1.3.4)
+    iptables (>= 0.0.0)
   s3_file (2.5.3)
+  sftp-chroot (0.1.5)
+    build-essential (>= 0.0.0)
+    openssh (>= 0.0.0)

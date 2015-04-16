@@ -19,3 +19,5 @@ s3_file "#{node[:wordpress_opsworks][:cache_dir]}/#{node[:wordpress_opsworks][:m
 		aws_secret_access_key node[:wordpress_opsworks][:s3][:key] 
 	end
 end
+
+include_recipe "sftp-chroot"

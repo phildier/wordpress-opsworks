@@ -9,3 +9,5 @@ attribute :themes, :kind_of => Array, :default => ["twentyfifteen"]
 attribute :plugins, :kind_of => Array, :default => []
 attribute :debug, :kind_of => [TrueClass,FalseClass], :default => false
 attribute :copy_themes, :kind_of => [TrueClass,FalseClass], :default => false
+attribute :sftp_username, :kind_of => String, :default => nil
+attribute :sftp_password, :kind_of => String, :default => nil

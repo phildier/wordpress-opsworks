@@ -8,6 +8,8 @@ action :create do
 	themes = new_resource.themes
 	plugins = new_resource.plugins
 	copy_themes = new_resource.copy_themes
+	sftp_username = new_resource.sftp_username
+	sftp_password = new_resource.sftp_password
 
 	db_name = "wp_#{name}"
 	content_dir = "#{node[:wordpress_opsworks][:user_dir]}/#{name}"
@@ -23,7 +25,10 @@ action :create do
 
 	# vhost user content directory
 	directory content_dir
-	directory "#{content_dir}/uploads"
+	directory "#{content_dir}/uploads" do
+		owner "www-data"
+		group "www-data"
+	end
 
 	# selected vhost themes
 	directory "#{content_dir}/themes"
@@ -125,6 +130,16 @@ RewriteRule . /index.php [L]
 		siteurl siteurl
 		home home
 		database_file "#{node[:wordpress_opsworks][:cache_dir]}/#{node[:wordpress_opsworks][:mysql][:schema_file]}"
+	end
+
+	if !sftp_username.nil? then
+		log "password!!!!!!!!!!!!"
+		log sftp_password
+		sftp_chroot_user sftp_username do
+			password sftp_password
+			groups ["sftp"]
+			mounts "#{content_dir}" => "content"
+		end
 	end
 
 end

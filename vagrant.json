@@ -5,30 +5,48 @@
   "default_attributes": {
   },
   "override_attributes": {
-	  "wordpress_opsworks":{
+	  "wordpress_opsworks": {
+		  "default_plugins":[
+				"wordfence",
+				"LayerSlider",
+				"gravityforms",
+				"wp-rss-aggregator",
+				"revslider",
+				"revision-control",
+				"sucuri-scanner",
+				"fusion-core"
+			  ],
+		  "default_themes":["Avada"],
 		  "content_dir":"/srv/www/wp-content/current",
-		  "mysql":{
+		  "mysql": {
 			  "host":"127.0.0.1",
 			  "username":"root",
 			  "password":"",
-			  "schema_file":"wpagency-20150325.sql.bz2",
+			  "schema_file":"wpagency-20150411.sql.bz2",
 			  "schema_file2":"/vagrant/cache/wordpress_lubbock.sql.bz2"
 		  },
-		  "vhosts":{
-			  "wpagency.galaxydigital.com":{
+		  "vhosts": {
+			  "wpagency.galaxydigital.com": {
 				  "siteurl":"http://wpagency.galaxydigital.com/",
 				  "home":"http://wpagency.galaxydigital.com/",
-				  "plugins":["akismet"],
 				  "debug":true,
-				  "copy_themes":true
+				  "copy_themes":false,
+				  "sftp_username":"test",
+				  "sftp_password":"test"
 			  },
-			  "www.volunteerlubbock.org":{
+			  "www.volunteerlubbock.org": {
 				  "themes":["vcl"],
 				  "plugins":["akismet"]
 			  },
-			  "one.wp.site":{
+			  "one.wp.site": {
+				  "siteurl":"http://one.wp.site/wordpress/",
+				  "home":"http://one.wp.site/",
+				  "debug":true,
+				  "copy_themes":false,
+				  "sftp_username":"test",
+				  "sftp_password":"test"
 			  },
-			  "two.wp.site":{
+			  "two.wp.site": {
 			  }
 		  }
 	  }

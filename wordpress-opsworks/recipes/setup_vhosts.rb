@@ -20,6 +20,8 @@ node[:wordpress_opsworks][:vhosts].each do |name,vhost|
 		aliases vhost[:aliases] || node[:wordpress_opsworks][:default_aliases]
 		debug vhost[:debug] || false
 		copy_themes vhost[:copy_themes] || false
+		sftp_username vhost[:sftp_username] || nil
+		sftp_password vhost[:sftp_password] || nil
 	end
 
 	wordpress_opsworks_user "#{name}-admin" do
@@ -36,6 +38,12 @@ node[:wordpress_opsworks][:vhosts].each do |name,vhost|
 		password vhost[:editor_password] || "editor"
 		role "editor"
 		level "7"
+	end
+
+	if vhost[:sftp_user]
+		wordpress_opsworks_sftp vhost[:sftp_user] do
+			password vhost[:admin_password]
+		end
 	end
 
 	wordpress_opsworks_options db_name do
