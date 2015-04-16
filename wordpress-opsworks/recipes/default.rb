@@ -20,4 +20,15 @@ s3_file "#{node[:wordpress_opsworks][:cache_dir]}/#{node[:wordpress_opsworks][:m
 	end
 end
 
+s3_file "#{node[:wordpress_opsworks][:cache_dir]}/#{node[:wordpress_opsworks][:uploads_archive]}" do
+	remote_path node[:wordpress_opsworks][:uploads_archive]
+	bucket node[:wordpress_opsworks][:s3][:bucket]
+	if node[:wordpress_opsworks][:s3][:id] then
+		aws_access_key_id node[:wordpress_opsworks][:s3][:id] 
+	end
+	if node[:wordpress_opsworks][:s3][:key] then
+		aws_secret_access_key node[:wordpress_opsworks][:s3][:key] 
+	end
+end
+
 include_recipe "sftp-chroot"

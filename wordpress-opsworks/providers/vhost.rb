@@ -30,6 +30,10 @@ action :create do
 		group "www-data"
 	end
 
+	wordpress_opsworks_archive "#{content_dir}/uploads" do
+		source "#{node[:wordpress_opsworks][:cache_dir]}/#{node[:wordpress_opsworks][:uploads_archive]}"
+	end
+
 	# selected vhost themes
 	directory "#{content_dir}/themes"
 	themes.each do |t|

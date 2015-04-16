@@ -17,6 +17,7 @@
 				"fusion-core"
 			  ],
 		  "default_themes":["Avada"],
+		  "uploads_archive":"wpagency-uploads-20150415.tar.bz2",
 		  "content_dir":"/srv/www/wp-content/current",
 		  "mysql": {
 			  "host":"127.0.0.1",
