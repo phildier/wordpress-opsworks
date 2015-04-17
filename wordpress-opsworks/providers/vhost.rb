@@ -32,6 +32,8 @@ action :create do
 
 	wordpress_opsworks_archive "#{content_dir}/uploads" do
 		source "#{node[:wordpress_opsworks][:cache_dir]}/#{node[:wordpress_opsworks][:uploads_archive]}"
+		owner "www-data"
+		group "www-data"
 	end
 
 	# selected vhost themes
