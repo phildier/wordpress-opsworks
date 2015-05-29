@@ -8,6 +8,7 @@ directory node[:wordpress_opsworks][:user_dir] do
 end
 
 package "mysql-client-5.5"
+package "sendmail"
 
 s3_file "#{node[:wordpress_opsworks][:cache_dir]}/#{node[:wordpress_opsworks][:mysql][:schema_file]}" do
 	remote_path node[:wordpress_opsworks][:mysql][:schema_file]
