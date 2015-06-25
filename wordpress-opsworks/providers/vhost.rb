@@ -151,5 +151,11 @@ RewriteRule . /index.php [L]
 end
 
 action :delete do
-    raise "not implemented"
+
+	name = new_resource.name
+
+	file "/etc/apache2/sites-enabled/#{name}.conf" do
+		action :delete
+	end
+
 end

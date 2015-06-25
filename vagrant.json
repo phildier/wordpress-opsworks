@@ -48,6 +48,7 @@
 				  "sftp_password":"test"
 			  },
 			  "two.wp.site": {
+				  "action":"delete"
 			  }
 		  }
 	  }

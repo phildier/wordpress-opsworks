@@ -12,9 +12,13 @@ node[:wordpress_opsworks][:vhosts].each do |name,vhost|
 	db_name = "wp_#{name}"
 
 	wordpress_opsworks_vhost name do
+		if vhost[:action] == "delete" then
+			action :delete
+		else
+			action :create
+		end
 		docroot docroot
 		source node[:wordpress_opsworks][:app_dir]
-		notifies :reload, "service[apache2]", :delayed
 		themes vhost[:themes] || node[:wordpress_opsworks][:default_themes]
 		plugins vhost[:plugins] || node[:wordpress_opsworks][:default_plugins]
 		aliases vhost[:aliases] || node[:wordpress_opsworks][:default_aliases]
@@ -22,6 +26,8 @@ node[:wordpress_opsworks][:vhosts].each do |name,vhost|
 		copy_themes vhost[:copy_themes] || false
 		sftp_username vhost[:sftp_username] || nil
 		sftp_password vhost[:sftp_password] || nil
+
+		notifies :reload, "service[apache2]", :delayed
 	end
 
 	wordpress_opsworks_user "#{name}-admin" do

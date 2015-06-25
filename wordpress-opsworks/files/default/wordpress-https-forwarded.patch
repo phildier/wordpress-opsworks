@@ -1,0 +1,13 @@
+diff --git a/wp-includes/functions.php b/wp-includes/functions.php
+index 728bb1a..a9aacaa 100644
+--- a/wp-includes/functions.php
++++ b/wp-includes/functions.php
+@@ -3706,6 +3706,8 @@ function is_ssl() {
+ 			return true;
+ 	} elseif ( isset($_SERVER['SERVER_PORT']) && ( '443' == $_SERVER['SERVER_PORT'] ) ) {
+ 		return true;
++	} elseif ( isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && ( 'https' == $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
++		return true;
+ 	}
+ 	return false;
+ }
